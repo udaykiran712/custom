@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="homepage_template" name="Home">
+        <t t-call="website.layout">
+            <div class="container text-center mt-5">
+                <h1>Welcome to
+                    <strong>Cosmic Commerce</strong>
+                </h1>
+                <div class="row mt-4">
+                    <div class="col">
+                        <h3>
+                            <t t-esc="total_customers"/>
+                        </h3>
+                        <p>Customers</p>
+                    </div>
+                    <div class="col">
+                        <h3>
+                            <t t-esc="total_orders"/>
+                        </h3>
+                        <p>Orders</p>
+                    </div>
+                    <div class="col">
+                        <h3>
+                            <t t-esc="vip_customers"/>
+                        </h3>
+                        <p>VIPs</p>
+                    </div>
+                </div>
+                <a href="/about" class="btn btn-primary mt-3">More About Me</a>
+            </div>
+        </t>
+    </template>
+
+    <template id="about_template" name="About Me">
+        <t t-call="website.layout">
+            <div class="container mt-4">
+                <h2>About Me</h2>
+                <t t-if="me">
+                    <p>
+                        <strong>Name:</strong>
+                        <t t-esc="me.name"/>
+                    </p>
+                    <p>
+                        <strong>Email:</strong>
+                        <t t-esc="me.contact_email"/>
+                    </p>
+                    <p>
+                        <strong>Mobile:</strong>
+                        <t t-esc="me.mobile_number"/>
+                    </p>
+                    <p>
+                        <strong>Age:</strong>
+                        <t t-esc="me.age"/>
+                        (Born:<t t-esc="me.birth_year"/>)
+                    </p>
+                    <p>
+                        <strong>Description:</strong>
+                        <t t-esc="me.note"/>
+                    </p>
+                </t>
+                <a href="/projects" class="btn btn-success mt-3">See Projects</a>
+            </div>
+        </t>
+    </template>
+
+    <template id="projects_template" name="Projects">
+        <t t-call="website.layout">
+            <div class="container mt-4">
+                <h2>Recent Orders (Cosmic Commerce)</h2>
+                <ul class="list-group">
+                    <t t-foreach="orders" t-as="order">
+                        <li class="list-group-item">
+                            <strong>
+                                <t t-esc="order.reference"/>
+                            </strong>
+                            by
+                            <t t-esc="order.buyer_id.name"/>
+                            |
+                            <t t-esc="order.order_date"/>
+                            |
+                            Age:
+                            <t t-esc="order.age"/>
+                        </li>
+                    </t>
+                </ul>
+                <a href="/" class="btn btn-secondary mt-4">← Back Home</a>
+            </div>
+        </t>
+    </template>
+
+    <template id="vip_customers_template" name="VIP Customers">
+        <t t-call="website.layout">
+            <div class="container mt-4">
+                <h2>VIP Customers</h2>
+                <t t-if="customers">
+                    <ul class="list-group">
+                        <t t-foreach="customers" t-as="cust">
+                            <li class="list-group-item">
+                                <strong>
+                                    <t t-esc="cust.name"/>
+                                </strong>
+                                (Age:<t t-esc="cust.age"/>)
+                            </li>
+                        </t>
+                    </ul>
+                </t>
+                <t t-else="">
+                    <p>No VIPs found yet.</p>
+                </t>
+                <a href="/" class="btn btn-outline-dark mt-3">← Back Home</a>
+            </div>
+        </t>
+    </template>
+</odoo>

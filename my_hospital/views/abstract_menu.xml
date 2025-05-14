@@ -1,0 +1,5 @@
+<odoo>
+    <menuitem id="menu_my_models_root" name="My Models" sequence="10"/>
+
+
+</odoo>

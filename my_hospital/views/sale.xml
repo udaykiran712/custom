@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<odoo>
+    <record id="view_sale_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.inherited</field>
+<!--        # name = anyname-->
+        <field name="model">sale.order</field>
+<!--        model = model that you want to inherit from other model-->
+        <field name="inherit_id" ref="sale.view_order_form"/>
+<!--        Ref = external id of the view open view in localhost debug options-->
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+<!--                name = the id of the field -->
+                <field name="sale_description"/>
+<!--                name = name in sale.py file-->
+            </field>
+        </field>
+    </record>
+
+    <record id="view_sale_order_list_inherit" model="ir.ui.view">
+        <field name="name">sale.order.inherited</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="sale_description"/>
+            </xpath>
+        </field>
+    </record>
+
+
+<!--    <record id="view_sale_order_list_inherit" model="ir.ui.view">-->
+<!--        <field name="name">sale.order.inherited</field>-->
+<!--        <field name="model">sale.order</field>-->
+<!--        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <field name="create_date" position="after">-->
+<!--                <field name="sale_description"/>-->
+<!--            </field>-->
+<!--        </field>-->
+<!--    </record>-->
+
+</odoo>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- List View -->
+    <record id="view_bank_receipt_list" model="ir.ui.view">
+        <field name="name">bank.receipt.list</field>
+        <field name="model">bank.receipt</field>
+        <field name="arch" type="xml">
+            <list string="Bank Receipts">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="partner_id"/>
+                <field name="amount"/>
+                <field name="payment_type"/>
+                <field name="journal_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_bank_receipt_form" model="ir.ui.view">
+        <field name="name">bank.receipt.form</field>
+        <field name="model">bank.receipt</field>
+        <field name="arch" type="xml">
+            <form string="Bank Receipt">
+                <header>
+                    <h1>
+                        <field name="name" readonly="1" class="oe_inline"/>
+                    </h1>
+                    <button name="action_submit"
+                            string="Submit"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="action_pay"
+                            string="Pay"
+                            type="object"
+                            class="btn-success"
+                            invisible="not invoice_id or state not in ('invoice_created', 'posted')"/>
+
+                    <field name="state" widget="statusbar"/>
+
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id" domain="[('customer_rank', '>', 0)]"/>
+                            <field name="customer_bank_id" domain="[('partner_id', '=', partner_id)]"/>
+                            <field name="amount"/>
+                            <field name="currency_id"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="to_partner_id"/>
+                            <field name="to_bank_id" domain="[('partner_id', '=', to_partner_id)]"/>
+                            <field name="payment_type" widget="radio"/>
+                            <field name="journal_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="remarks" placeholder="Add notes..." class="oe_inline"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_bank_receipt" model="ir.actions.act_window">
+        <field name="name">Bank Receipts</field>
+        <field name="res_model">bank.receipt</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menuitem under Accounting > Customers -->
+
+
+    <menuitem id="menu_bank_receipt" name="Bank Receipts"
+              parent="account.menu_finance_receivables"
+              action="action_bank_receipt"
+              sequence="90"/>
+
+</odoo>

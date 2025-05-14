@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="action_hospital_kids" model="ir.actions.act_window">
+        <field name="name">Kids</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">list,form,kanban</field>
+        <field name="context">
+            {'search_default_gender':1}
+            <!--                        {'search_default_gender':1,'search_default_Patient_name':1,'search_default_responsible_id':1}-->
+
+        </field>
+        <!--        <field name="domain">[('age','&lt;=',18),('gender','=','male')]</field> another example for below line-->
+        <field name="domain">[('age','&lt;=',18)]</field>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Patient
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem
+            id="menu_kids"
+            name="Kids"
+            parent="menu_hospital_patient_root"
+            action="action_hospital_kids"
+            sequence="20"/>
+</odoo>

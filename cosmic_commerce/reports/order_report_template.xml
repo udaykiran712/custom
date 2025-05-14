@@ -1,0 +1,91 @@
+<odoo>
+    <data>
+        <template id="report_customer_orders">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="order">
+                        <t t-call="cosmic_commerce.report_customer_orders_document"/>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="report_customer_orders_document">
+            <t t-set="order" t-value="order"/>
+            <t t-set="current_date" t-value="datetime.datetime.today().strftime('%Y-%m-%d')"/>
+            <div class="page">
+                <div class="header" style="text-align: center; margin-bottom: 20px; padding-bottom: 10px;">
+                    <img src="cosmic_commerce/static/description/cosmic.png" alt="Company Logo"
+                         style="max-height: 50px;"/>
+                    <br/>
+                    <h2 style="margin-top: 10px;">Order Details Report</h2>
+                    <p>
+                        <strong>Order for:</strong>
+                        <span t-field="order.buyer_id.name"/>
+                        |
+                        <strong>Order Number:</strong>
+                        <span t-field="order.reference"/>
+                    </p>
+                </div>
+
+                <div class="order-info">
+                    <strong>Order Date:</strong>
+                    <span>
+                        <t t-esc="order.order_date"/>
+                    </span>
+                    <br/>
+                    <strong>Customer Mobile:</strong>
+                    <span>
+                        <t t-esc="order.mobile_number"/>
+                    </span>
+                    <br/>
+                    <strong>Customer Age:</strong>
+                    <span>
+                        <t t-esc="order.age"/>
+                    </span>
+                </div>
+
+                <t t-if="order.order_details_ids">
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <strong>Order Details:</strong>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Sub Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="order.order_details_ids" t-as="line">
+                                        <td>
+                                            <span t-field="line.product_sku_id.display_name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.quantity"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.unit_price"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line.quantity * line.unit_price"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+                <div class="footer"
+                     style="text-align: center; border-top: 1px solid #000; padding-top: 10px; margin-top: 20px;">
+                    <p style="font-size: 12px;">
+                        Company XYZ
+                        <span t-esc="current_date"/>
+                    </p>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

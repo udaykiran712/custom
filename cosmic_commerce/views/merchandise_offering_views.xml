@@ -1,0 +1,41 @@
+<odoo>
+    <record id="view_merchandise_offering_form" model="ir.ui.view">
+        <field name="name">merchandise.offering.form</field>
+        <field name="model">merchandise.offering</field>
+        <field name="arch" type="xml">
+            <form string="Merchandise Offering">
+                <sheet>
+                    <group>
+                        <field name="display_name"/>
+                        <field name="selling_price"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_merchandise_offering_list" model="ir.ui.view">
+        <field name="name">merchandise.offering.list</field>
+        <field name="model">merchandise.offering</field>
+        <field name="arch" type="xml">
+            <list string="Product offers">
+                <field name="display_name"/>
+                <field name="selling_price"/>
+                <field name="create_uid" string="Created By" options="{'no_open': True, 'no_create': True}"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_merchandise_offering" model="ir.actions.act_window">
+        <field name="name">Merchandise Offerings</field>
+        <field name="res_model">merchandise.offering</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_merchandise_offering"
+              name="Products"
+              parent="menu_cosmic_commerce"
+              action="action_merchandise_offering"
+              sequence="30"/>
+</odoo>

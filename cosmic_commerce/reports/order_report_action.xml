@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <record id="action_report_customer_orders" model="ir.actions.report">
+            <field name="name">Customer Orders Report</field>
+            <field name="model">order.record</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">cosmic_commerce.report_customer_orders</field>
+            <field name="report_file">cosmic_commerce.report_customer_orders</field>
+        </record>
+    </data>
+</odoo>

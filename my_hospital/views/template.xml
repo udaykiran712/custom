@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--controllers model-->
+
+<odoo>
+
+    <template id="patients_page" name="Hospital Patients">
+        <t t-call="website.layout">
+            <div class="container">
+                Hey Subscribe the channel..!
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>
+                                Patient Names
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="patients" t-as="pat">
+                            <!--                            patients is the name defined in conrollers.main.py file-->
+                            <tr>
+                                <td>
+                                    <t t-esc="pat.name"/>
+                                    <!--                                    pat.name , pat.age are the fields in patient.py file-->
+
+
+                                </td>
+                            </tr>
+                        </t>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        </t>
+    </template>
+
+
+</odoo>

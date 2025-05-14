@@ -1,0 +1,55 @@
+<odoo>
+    <record id="view_order_record_form" model="ir.ui.view">
+        <field name="name">order.record.form</field>
+        <field name="model">order.record</field>
+        <field name="arch" type="xml">
+            <form string="Order Record">
+                <sheet>
+                    <group>
+                        <field name="reference"/>
+                        <field name="buyer_id"/>
+                        <field name="age"/>
+                        <field name="order_date"/>
+                    </group>
+                    <notebook>
+                        <page string="Order Details">
+                            <field name="order_details_ids">
+                                <list editable="bottom">
+                                    <field name="product_sku_id"/>
+                                    <field name="quantity"/>
+                                    <field name="unit_price"/>
+                                    <field name="subtotal"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_order_record_list" model="ir.ui.view">
+        <field name="name">order.record.list</field>
+        <field name="model">order.record</field>
+        <field name="arch" type="xml">
+            <list string="Order Records">
+                <field name="reference"/>
+                <field name="buyer_id"/>
+                <field name="order_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_order_record" model="ir.actions.act_window">
+        <field name="name">Order Records</field>
+        <field name="res_model">order.record</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_order_record"
+              name="Order Records"
+              parent="menu_cosmic_commerce"
+              action="action_order_record"
+              sequence="20"/>
+</odoo>

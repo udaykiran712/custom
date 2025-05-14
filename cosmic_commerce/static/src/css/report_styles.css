@@ -1,0 +1,42 @@
+.my-report-content {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.my-report-content .order-details-table {
+    width: 100% !important;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.my-report-content .order-details-table th, .my-report-content .order-details-table td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.my-report-content .order-details-table th {
+    background-color: #f2f2f2;
+}
+
+.my-report-content .order-info {
+    margin-bottom: 15px;
+    width: 100% !important;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.my-report-content .order-info strong {
+    display: inline-block;
+    width: 150px;
+    vertical-align: top;
+    margin-right: 5px;
+}
+
+/* If needed, target the body *within* the report only */
+.my-report-content body {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}

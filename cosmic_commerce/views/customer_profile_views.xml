@@ -1,0 +1,172 @@
+<odoo>
+    <data noupdate="0">
+        <record id="view_customer_profile_form" model="ir.ui.view">
+            <field name="name">customer.profile.form</field>
+            <field name="model">customer.profile</field>
+            <field name="arch" type="xml">
+                <form string="Customer Profile">
+                    <header>
+
+                        <button id="button_create_order_record" name="action_open_appointment_wizard" type="object"
+                                string="Create Order Record" class="btn-primary"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object"
+                                    name="action_view_orders"
+                                    icon="fa-shopping-cart">
+                                <field name="order_count" widget="statinfo" string="Total Orders"/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="age"/>
+                                <field name="note"/>
+                                <field name="total_spent"/>
+                                <field name="birth_year" widget="integer" options="{'format': 0}"/>
+                                <field name="contact_email"
+                                       groups="cosmic_commerce.group_cosmic_admin"/>
+                                />
+                            </group>
+                            <group>
+                                <field name="mobile_number"/>
+                                <field name="category_labels_id" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_customer_profile_list" model="ir.ui.view">
+            <field name="name">customer.profile.list</field>
+            <field name="model">customer.profile</field>
+            <field name="arch" type="xml">
+                <list string="Customer Profiles">
+                    <field name="name"/>
+                    <field name="age"/>
+                    <field name="contact_email"/>
+                    <!--                    <field name="category_labels_id"/>-->
+                    <field name="mobile_number"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_customer_profile_search" model="ir.ui.view">
+            <field name="name">customer.profile.search</field>
+            <field name="model">customer.profile</field>
+            <field name="arch" type="xml">
+                <search string="Customers">
+                    <field name="name"/>
+                    <field name="contact_email"/>
+                    <filter string="Male" name="male" domain="[('gender', '=', 'male')]"/>
+
+
+                    <group expand="1" string="Group By">
+                        <filter string="Names" name="name" context="{'group_by':'name'}"/>
+
+                        <!--                    name is used to search by default in action record-->
+                        <filter string="Contact Email" name="contact_email" context="{'group_by':'contact_email'}"/>
+
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_customer_profile_kanban" model="ir.ui.view">
+            <field name="name">customer.profile.kanban</field>
+            <field name="model">customer.profile</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <kanban sample="1">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="age"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <ul>
+                                        <li>
+                                            Name:
+                                            <field name="name"/>
+                                        </li>
+                                        <li>
+                                            Age:
+                                            <field name="age"/>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_customer_profile_calendar" model="ir.ui.view">
+            <field name="name">customer.profile.calendar</field>
+            <field name="model">customer.profile</field>
+            <field name="arch" type="xml">
+                <calendar
+                        string="Meetings"
+                        date_start="date_start">
+                    <field name="name"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="view_customer_profile_pivot" model="ir.ui.view">
+            <field name="name">customer.profile.pivot</field>
+            <field name="model">customer.profile</field>
+            <field name="arch" type="xml">
+                <pivot string="Pivot Title">
+                    <field name="name" type="row"/>
+                    <field name="mobile_number" type="col"/>
+                    <field name="age" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_customer_profile_graph" model="ir.ui.view">
+            <field name="name">customer.profile.graph</field>
+            <field name="model">customer.profile</field>
+            <field name="arch" type="xml">
+                <graph string="Customer Names" type="bar">
+                    <field name="name" type="row"/>
+                    <field name="age" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+
+        <record id="action_customer_profile" model="ir.actions.act_window">
+            <field name="name">Customer Profiles</field>
+            <field name="res_model">customer.profile</field>
+
+            <field name="context">
+                {'search_default_male': 1}
+            </field>
+            <field name="view_mode">list,form,kanban,calendar,pivot,graph,activity</field>
+        </record>
+
+        <menuitem id="menu_cosmic_commerce"
+                  name="Cosmic Commerce"
+                  sequence="10"/>
+
+        <menuitem id="menu_customer_profile"
+                  name="Customer Profiles"
+                  parent="menu_cosmic_commerce"
+                  action="action_customer_profile"
+                  sequence="10">
+            <!--            name="groups_id" eval="[(4, ref('cosmic_commerce.group_cosmic_users'))]"/>-->
+        </menuitem>
+
+    </data>
+</odoo>

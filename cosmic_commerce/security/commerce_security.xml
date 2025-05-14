@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="ir.module.category" id="module_category_cosmic_commerce">
+            <field name="name">Cosmic Commerce</field>
+            <field name="description">Category Cosmic Commerce</field>
+            <!--        <field name="sequence">7</field>-->
+        </record>
+
+        <record id="group_cosmic_users" model="res.groups">
+            <field name="name">Cosmic Commerce Users</field>
+            <field name="category_id" ref="module_category_cosmic_commerce"/>
+        </record>
+
+        <record id="group_cosmic_admin" model="res.groups">
+            <field name="name">Cosmic Commerce Admin</field>
+            <field name="category_id" ref="module_category_cosmic_commerce"/>
+            <field name="implied_ids" eval="[(4, ref('group_cosmic_users'))]"/>
+        </record>
+
+
+    </data>
+</odoo>
+

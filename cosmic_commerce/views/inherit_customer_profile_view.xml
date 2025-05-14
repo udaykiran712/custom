@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<odoo>
+    <record id="view_customer_profile_form_inherit" model="ir.ui.view">
+        <field name="name">customer.profile.inherited</field>
+        <field name="model">customer.profile</field>
+        <field name="inherit_id" ref="cosmic_commerce.view_customer_profile_form"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="gender"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_customer_profile_list_inherit" model="ir.ui.view">
+        <field name="name">customer.profile.inherited</field>
+        <field name="model">customer.profile</field>
+        <field name="inherit_id" ref="cosmic_commerce.view_customer_profile_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="gender"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>
